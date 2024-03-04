@@ -1,0 +1,29 @@
+volumes:
+  mocha-db:
+
+services:
+  mocha-server:
+    pull_policy: build
+    restart: always
+    build:
+      context: .
+    depends_on:
+      - mocha-database
+    ports:
+      - "8080:8080"
+    env_file: .env
+    develop:
+      watch:
+        - path: /Users/alexandru/.config/mocha
+          target: /mocha-config
+          action: sync+restart
+        - path: /Users/alexandru/GolandProjects/mocha-server
+          target: /mocha
+          action: rebuild
+
+  mocha-database:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
