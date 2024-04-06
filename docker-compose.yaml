@@ -1,0 +1,22 @@
+volumes:
+  mongo-volume:
+
+secrets:
+  database-username:
+    environment: MOCHA_DATABASE_USERNAME
+  database-password:
+    environment: MOCHA_DATABASE_PASSWORD
+
+
+services:
+  database:
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: /run/secrets/database-username
+      MONGO_INITDB_ROOT_PASSWORD: /run/secrets/database-password
+    secrets:
+      - database-username
+      - database-password
