@@ -3,3 +3,7 @@ database:
   password: mocha-password
   host: localhost
   port: 27017
+
+server:
+  host: localhost
+  port: 8080

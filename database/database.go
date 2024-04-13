@@ -1,6 +1,7 @@
 package database
 
 import (
+	"fmt"
 	"mocha-server/util"
 	"mocha-server/util/log"
 	"time"
@@ -32,6 +33,7 @@ func (database *Mongo) Connect() {
 	port := config.Yaml.GetString("database.port")
 
 	hostUri := host + ":" + port
+	fmt.Println(hostUri)
 
 	// 3. Build credential options
 	credentialOptions := options.Credential{
@@ -42,11 +44,11 @@ func (database *Mongo) Connect() {
 	// 4. Build connection options
 	connectionOptions := options.Client().
 		SetHosts([]string{hostUri}).
-		SetAppName("Mocha").
+		SetTLSConfig(nil).
 		SetAuth(credentialOptions)
 
 	// 5. Connect
-	context, contextCancel := util.NewBackgroundContext(10 * time.Second)
+	context, contextCancel := util.NewBackgroundContext(5 * time.Second)
 	defer contextCancel()
 
 	client, err := mongo.Connect(context, connectionOptions)
