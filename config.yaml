@@ -1,3 +1,5 @@
-mongo:
+database:
+  username: mocha
+  password: mocha-password
   host: localhost
   port: 27017
