@@ -37,6 +37,8 @@ docker compose up -d
 
 ### 1.3. Build the application
 
+Set the same username and password in the `config.yaml` file and then run:
+
 ```bash
 go build
 ```

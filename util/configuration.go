@@ -28,7 +28,7 @@ func Configuration() *configuration {
 		yamlViper.SetConfigName("config")
 		yamlViper.SetConfigType("yaml")
 		yamlViper.AddConfigPath("$HOME/.config/mocha")
-		yamlViper.AddConfigPath(".")
+		yamlViper.AddConfigPath("./")
 		err := yamlViper.ReadInConfig()
 		if err != nil {
 			logger.Panic(err)
